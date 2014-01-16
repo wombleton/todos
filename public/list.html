@@ -1,0 +1,11 @@
+<ul>
+  <li ng-repeat="todo in todos | orderByPriority">
+    {{todo.text}}
+    {{todo.priority}}
+    <a href="#/edit/{{project.$id}}">edit</a>
+  </li>
+</ul>
+<form ng-submit="addTodo()">
+  <input type="text" ng-model="todoText" placeholder="Add todo">
+  <input type="submit" value="add">
+</form>

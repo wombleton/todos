@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todos</title>
+  </head>
+  <body>
+    <script type="text/x-handlebars">
+      <h2>// TODO</h2>
+
+      {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" id="todos">
+      <ul>
+        {{#each itemController="todo"}}
+        <li>
+          {{#if isEditing}}
+            {{input value=text}}
+            {{view Ember.Select
+                content=priorities
+                optionValuePath="content.value"
+                optionLabelPath="content.text"
+              value=priority
+            }}
+            <button {{action "updateTodo"}}>Save</button>
+            <a href {{action "cancelEdit"}}>cancel</a>
+          {{else}}
+            <label>{{text}} ({{priorityLabel}} Priority)</label>
+            <a href {{action "editTodo"}}>edit</a>
+            <a href {{action "removeTodo"}}>delete</a>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+      {{input type="text" value=text action="createTodo" placeholder="Add todo"}}
+    </script>
+
+    <script type="text/x-handlebars" id="index">
+      {{#if loginFailed}}
+        <div>Invalid username or password.</div>
+      {{/if}}
+      <form {{action "login" on="submit"}}>
+        <div>
+          <div>
+            <label>Username</label>
+          </div>
+
+          <div>
+            {{input value=username type="text"}}
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <label>Password</label>
+          </div>
+
+          <div>
+            {{input value=password type="password"}}
+          </div>
+        </div>
+        <div>
+            <label>
+              {{input type="checkbox" checked=register}}
+              New User
+            </label>
+        </div>
+
+        <button type="submit">Log in!</button>
+      </form>
+    </script>
+
+    <script src="js/libs/jquery-1.10.2.js"></script>
+    <script src="js/libs/handlebars-1.1.2.js"></script>
+    <script src="js/libs/ember-1.3.1.js"></script>
+    <script src="js/libs/ember-data.js"></script>
+    <script src="js/todos.js"></script>
+  </body>
+</html>
