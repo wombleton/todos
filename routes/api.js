@@ -16,6 +16,13 @@ module.exports = {
         }
 
         db.createUser(username, password, callback);
+      },
+      function(id, callback) {
+        req.login({
+          id: id
+        }, function(err) {
+          callback(err, id);
+        });
       }
     ], function(err, id) {
       if (err) {
