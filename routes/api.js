@@ -99,8 +99,11 @@ module.exports = {
       db.removeTodo({
         id: req.params.id,
         user_id: req.user.id
-      }, function(err, id) {
+      }, function(err) {
         if (err) {
+          if (err.status) {
+            return res.send(err.status, err.error);
+          }
           return res.send(500, err);
         }
 
