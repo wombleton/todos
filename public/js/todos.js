@@ -70,7 +70,9 @@ App.TodosController = Ember.ArrayController.extend({
   },
   filtered: function() {
     return
-  }
+  },
+  sortProperties: ['priority'],
+  sortAscending: false
 });
 
 App.TodoController = Ember.ObjectController.extend({
